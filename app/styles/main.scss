@@ -12,8 +12,33 @@ $icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 100%;
+}
+video {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* Minimum height/width */
+
+.minHeightWidth {
+  height: auto;
+  width: auto;
+  min-height: 100%;
+  min-width: 100%;
+  position: absolute;
+}
+
+/* CSS Transform-Origin */
+
+.transform-origin {
+  transform-origin: 200% 50%;
+  -webkit-transform-origin: 200% 50%;
 }
 
 /* Responsive: Portrait tablets and up */
