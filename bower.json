@@ -2,6 +2,7 @@
   "name": "dancerprofile",
   "private": true,
   "dependencies": {
-    "jquery": "2.1.4"
+    "jquery": "2.1.4",
+    "textillate": "~0.4.0"
   }
 }
