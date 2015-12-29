@@ -67,6 +67,7 @@ module.exports = function (grunt) {
             '<%= config.app %>/{,*/}*.html',
             '.tmp/styles/{,*/}*.css',
             '<%= config.app %>/images/{,*/}*',
+            '<%= config.app %>/videos/{,*/}*',
             '.tmp/scripts/{,*/}*.js'
           ],
           port: 9000,
@@ -261,6 +262,7 @@ module.exports = function (grunt) {
           src: [
             '*.{ico,png,txt}',
             'images/{,*/}*.webp',
+            'videos/{,*/}*.*',
             '{,*/}*.html',
             'styles/fonts/{,*/}*.*'
           ]
