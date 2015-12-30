@@ -82,16 +82,37 @@ $(document).ready(function() {
     shouldPosition = true;
     resize();
 
-    // $('.name').fadeIn(3000, function() {
-    //   $( "span" ).fadeIn( 100 );
-    // });
     setTimeout(function() {
       $('.name').fadeIn(3000)
       $('ul li:nth-child(1)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 700 });
       $('ul li:nth-child(2)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 900 });
       $('ul li:nth-child(3)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 1000 });
+
+      setTimeout(function() {
+        $('.contact').fadeIn(2000, function() {
+          $(this)
+            .mouseover(function() {
+              $('.bottom').css('opacity', 1);
+              $('.top').css('opacity', 0);
+            })
+            .mouseout(function() {
+              $('.bottom').css('opacity', 0);
+              $('.top').css('opacity', 1);
+            })
+            .click(function(){
+              window.location = 'mailto:caripearl10@gmail.com';
+            });
+        });
+        $('.contact-label').textillate({ in: {effect: 'fadeInUp'}, initialDelay: 400 });
+      }, 3900);
     }, 5000);
   } else { // revert to background image on mobile
     $('#player').remove();
+    setTimeout(function() {
+      $('.name').fadeIn(3000)
+      $('ul li:nth-child(1)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 700 });
+      $('ul li:nth-child(2)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 900 });
+      $('ul li:nth-child(3)').textillate({ in: {effect: 'fadeInLeft'}, initialDelay: 1000 });
+    }, 1000);
   }
 });
