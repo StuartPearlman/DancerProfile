@@ -82,7 +82,7 @@ $(document).ready(function() {
     shouldPosition = true;
     resize();
 
-    player.oncanplaythrough = () => {
+    player.oncanplaythrough = function() {
       $('#spinner').remove();
       $player.css('visibility', 'visible');
       player.play();

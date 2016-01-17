@@ -99,7 +99,15 @@ module.exports = function (grunt) {
           ]
         }]
       },
-      server: '.tmp'
+      server: '.tmp',
+      concatenated: {
+        src: [
+          'dist/scripts/main.js',
+          'dist/scripts/vendor.js',
+          'dist/styles/main.css',
+          'dist/styles/vendor.css'
+        ]
+      }
     },
 
     // Make sure code styles are up to par and there are no obvious mistakes
@@ -228,16 +236,11 @@ module.exports = function (grunt) {
     // By default, your `index.html`'s <!-- Usemin block --> will take care
     // of minification. These next options are pre-configured if you do not
     // wish to use the Usemin blocks.
-    // cssmin: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/styles/main.css': [
-    //         '.tmp/styles/{,*/}*.css',
-    //         '<%= config.app %>/styles/{,*/}*.css'
-    //       ]
-    //     }
-    //   }
-    // },
+    cssmin: {
+      options: {
+        keepSpecialComments: 0
+      }
+    },
     // uglify: {
     //   dist: {
     //     files: {
@@ -247,9 +250,18 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // concat: {
-    //   dist: {}
-    // },
+    concat: {
+      js: {
+        src: ['dist/scripts/vendor.js', 'dist/scripts/main.js'],
+        dest: 'dist/scripts/dancer.js',
+        nonull: true
+      },
+      css: {
+        src: ['dist/styles/vendor.css', 'dist/styles/main.css'],
+        dest: 'dist/styles/dancer.css',
+        nonull: true
+      }
+    },
 
     // Copies remaining files to places other tasks can use
     copy: {
@@ -291,6 +303,11 @@ module.exports = function (grunt) {
     }
   });
 
+  grunt.registerTask('cleanup', [
+    'concat:js',
+    'concat:css',
+    'clean:concatenated',
+  ]);
 
   grunt.registerTask('serve', 'start the server and preview your app', function (target) {
 
@@ -323,7 +340,8 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:dist',
-    'usemin'
+    'usemin',
+    'cleanup'
   ]);
 
   grunt.registerTask('default', [
