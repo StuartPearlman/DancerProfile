@@ -3,7 +3,6 @@
   "private": true,
   "dependencies": {
     "jquery": "2.1.4",
-    "textillate": "0.4.0",
-    "material-spinner": "0.0.1"
+    "textillate": "0.4.0"
   }
 }
