@@ -241,15 +241,13 @@ module.exports = function (grunt) {
         keepSpecialComments: 0
       }
     },
-    // uglify: {
-    //   dist: {
-    //     files: {
-    //       '<%= config.dist %>/scripts/scripts.js': [
-    //         '<%= config.dist %>/scripts/scripts.js'
-    //       ]
-    //     }
-    //   }
-    // },
+    uglify: {
+      options: {
+        compress: {
+          drop_console: true
+        }
+      }
+    },
     concat: {
       js: {
         src: ['dist/scripts/vendor.js', 'dist/scripts/main.js'],
