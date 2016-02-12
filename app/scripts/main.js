@@ -82,7 +82,7 @@ $(document).ready(function() {
     shouldPosition = true;
     resize();
 
-    player.oncanplaythrough = function() {
+    var animateText = function() {
       $('#spinner').remove();
       $player.css('visibility', 'visible');
       player.play();
@@ -111,8 +111,20 @@ $(document).ready(function() {
           $('.contact-label').textillate({ in: {effect: 'fadeInUp'}, initialDelay: 200 });
         }, 3100);
       }, 4700);
-    }
-  } else { // revert to background image on mobile
+    };
+
+    var checkIfLoaded = function() {
+      if (player.duration === player.buffered.end(0)) {
+        clearInterval(loadingInterval);
+        animateText();
+      }
+    };
+
+    var loadingInterval;
+    player.addEventListener('loadedmetadata', function() {
+      loadingInterval = setInterval(checkIfLoaded, 30);
+    });
+  } else { // revert to background image on mobile (pending image)
     $('#spinner').remove();
     $('#player').remove();
     $('body').addClass('mobile');
