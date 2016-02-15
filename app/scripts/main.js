@@ -10,6 +10,7 @@ $(document).ready(function() {
     var videoRatio = 854 / 460;
 
     player.volume = 0.5; // half of system volume
+    player.load(); // explicitly load to always trigger metadata listener
 
     var resize = function() {
       if (!shouldResize) { return; }
