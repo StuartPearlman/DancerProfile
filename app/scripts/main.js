@@ -44,6 +44,8 @@ $(document).ready(function() {
   };
 
   if (window.orientation === undefined) { // use video on desktop
+    $('.image-wrapper').remove();
+
     var $player = $('#player');
     var player = $player.get(0);
     var $parent = $player.parent();
@@ -148,11 +150,24 @@ $(document).ready(function() {
     player.addEventListener('loadedmetadata', function() {
       loadingInterval = setInterval(checkIfLoaded, 30);
     });
-  } else { // revert to background image on mobile (pending image)
+  } else { // revert to animated images on mobile
     $('#spinner').remove();
     $('#player').remove();
     $('body').addClass('mobile');
 
-    animateText(3000, 700, 2000, 400, 3900);
+    var baseFade = 2500;
+    $('.image-wrapper').children().each(function(index) {
+      $(this).delay(1000 * index).fadeTo(baseFade, 1, function() {
+        $(this).fadeTo(baseFade - 600, 0);
+
+        if ($(this).is(':last-child')) {
+          // would prefer to use a callback (here and elsewhere), but the animations feel more
+          // cohesive and fluid with some overlap
+          setTimeout(function() {
+            animateText(3000, 700, 2000, 400, 3900);
+          }, baseFade - 1300);
+        }
+      });
+    });
   }
 });
