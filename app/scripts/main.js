@@ -140,7 +140,10 @@ $(document).ready(function() {
     };
 
     var checkIfLoaded = function() {
-      if (player.duration - player.buffered.end(0) < 1) { // Firefox never completely fills buffer!
+      if (
+        player.buffered.length &&
+        player.duration - player.buffered.end(0) < 1 // Firefox never completely fills buffer!
+      ) {
         clearInterval(loadingInterval);
         playVideoAndAnimateText();
       }
