@@ -32,7 +32,7 @@ $(document).ready(function() {
             $(topClass).css(opacity, 1);
           })
           .click(function(){
-            window.location = 'mailto:caripearl10@gmail.com';
+            window.location = 'mailto:cpearl613@gmail.com';
           });
       });
 
@@ -139,12 +139,30 @@ $(document).ready(function() {
       }, 4700);
     };
 
+    var isLocalStorageSupported = function() { // Safari incognito mode support
+      var testKey = 'test';
+
+      try {
+        window.localStorage.setItem(testKey, '1');
+        window.localStorage.removeItem(testKey);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    };
+
     var checkIfLoaded = function() {
-      if (
+      if (isLocalStorageSupported() && window.localStorage.getItem('isVideoCached')) {
+        clearInterval(loadingInterval);
+        playVideoAndAnimateText();
+      } else if (
         player.buffered.length &&
         player.duration - player.buffered.end(0) < 1 // Firefox never completely fills buffer!
       ) {
         clearInterval(loadingInterval);
+        if (isLocalStorageSupported()) {
+          window.localStorage.setItem('isVideoCached', true);
+        }
         playVideoAndAnimateText();
       }
     };
